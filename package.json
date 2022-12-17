@@ -4,8 +4,11 @@
   "description": "Proctice MERN stack",
   "main": "server.js",
   "scripts": {
+    "client-install":"npm install --prefix client",
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client":"npm run dev --prefix client",
+    "dev":"concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Andy Yseng",
   "license": "MIT",
