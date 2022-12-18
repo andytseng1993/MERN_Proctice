@@ -3,12 +3,13 @@ import {CSSTransition,TransitionGroup} from 'react-transition-group'
 import { v4 as uuidv4 } from 'uuid'
 import { useState } from 'react'
 
-const defaultItems=[
+const defaultItems=
+{items:[
     {id:uuidv4(),name:'Eggs'},
     {id:uuidv4(),name:'Milk'},
     {id:uuidv4(),name:'Steak'},
     {id:uuidv4(),name:'Water'}
-]
+]}
 const ShoppingList = ()=>{
     const [items,setItems] = useState(defaultItems)
 
@@ -16,12 +17,12 @@ const ShoppingList = ()=>{
         const name = prompt('Enter Item')
         if(name){
             setItems(pre=>(
-                [...pre,{id:uuidv4(),name}]
+                {items:[...pre.items,{id:uuidv4(),name}]}
             ))
         }
     }
     const deleteItem =(id)=>{
-        setItems(pre=>(pre.filter(item=>item.id!==id)))
+        setItems(pre=>({items:pre.items.filter(item=>item.id!==id)}))
     }
     return (
         <Container>
@@ -31,7 +32,7 @@ const ShoppingList = ()=>{
             </Button>
             <ListGroup>
                 <TransitionGroup className='shopping-list'>
-                    {items.map(({id,name})=>(
+                    {items.items.map(({id,name})=>(
                         <CSSTransition key = {id} timeout={500} classNames='fade'>
                             <ListGroupItem>
                                 <Button className='remove-btn'  
