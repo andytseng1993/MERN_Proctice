@@ -2,7 +2,7 @@ import {Container, ListGroup, ListGroupItem, Button} from 'reactstrap'
 import {CSSTransition,TransitionGroup} from 'react-transition-group'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch,useSelector } from "react-redux"
-import { addItem,getItems,deleteItem } from '../redux/actions'
+import { addItem,deleteItem } from '../redux/actions'
 
 
 const ShoppingList = ()=>{
@@ -21,10 +21,6 @@ const ShoppingList = ()=>{
     }
     return (
         <Container>
-            <Button color='dark' style={{marginBottom:'2rem'}}
-                onClick={addItemBtn}>
-                Add Item
-            </Button>
             <ListGroup>
                 <TransitionGroup className='shopping-list'>
                     {items.map(({id,name})=>(
