@@ -12,3 +12,9 @@ export const addItem = (product)=>{
         payload: product
     }
 }
+export const deleteItem = (id)=>{
+    return{
+        type:ACTIONS.DELETE_ITEM,
+        payload: id
+    }
+}

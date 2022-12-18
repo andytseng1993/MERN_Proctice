@@ -1,42 +1,37 @@
 import {Container, ListGroup, ListGroupItem, Button} from 'reactstrap'
 import {CSSTransition,TransitionGroup} from 'react-transition-group'
 import { v4 as uuidv4 } from 'uuid'
-import { useState } from 'react'
+import { useDispatch,useSelector } from "react-redux"
+import { addItem,getItems,deleteItem } from '../redux/actions'
 
-const defaultItems=
-{items:[
-    {id:uuidv4(),name:'Eggs'},
-    {id:uuidv4(),name:'Milk'},
-    {id:uuidv4(),name:'Steak'},
-    {id:uuidv4(),name:'Water'}
-]}
+
 const ShoppingList = ()=>{
-    const [items,setItems] = useState(defaultItems)
+    const dispatch = useDispatch()
+    const {items} = useSelector(state=>state.items)
 
-    const addItem =()=>{
+    const addItemBtn =()=>{
         const name = prompt('Enter Item')
+        console.log(name)
         if(name){
-            setItems(pre=>(
-                {items:[...pre.items,{id:uuidv4(),name}]}
-            ))
+            dispatch(addItem({id:uuidv4(),name}))
         }
     }
-    const deleteItem =(id)=>{
-        setItems(pre=>({items:pre.items.filter(item=>item.id!==id)}))
+    const deleteItemBtn =(id)=>{
+        dispatch(deleteItem(id))
     }
     return (
         <Container>
             <Button color='dark' style={{marginBottom:'2rem'}}
-                onClick={addItem}>
+                onClick={addItemBtn}>
                 Add Item
             </Button>
             <ListGroup>
                 <TransitionGroup className='shopping-list'>
-                    {items.items.map(({id,name})=>(
-                        <CSSTransition key = {id} timeout={500} classNames='fade'>
+                    {items.map(({id,name})=>(
+                        <CSSTransition key={id} timeout={500} classNames='fade'>
                             <ListGroupItem>
                                 <Button className='remove-btn'  
-                                    color='danger' size='sm' onClick={()=>deleteItem(id)}>   
+                                    color='danger' size='sm' onClick={()=>deleteItemBtn(id)}>   
                                     &times;
                                 </Button>
                                 {name}
