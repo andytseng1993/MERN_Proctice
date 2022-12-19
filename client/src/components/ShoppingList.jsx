@@ -1,41 +1,39 @@
 import {Container, ListGroup, ListGroupItem, Button} from 'reactstrap'
 import {CSSTransition,TransitionGroup} from 'react-transition-group'
-import { v4 as uuidv4 } from 'uuid'
-import { useState } from 'react'
+import { useDispatch,useSelector } from "react-redux"
+import { addItem,deleteItem, getItems } from '../redux/actions'
+import { useEffect } from 'react'
 
-const defaultItems=[
-    {id:uuidv4(),name:'Eggs'},
-    {id:uuidv4(),name:'Milk'},
-    {id:uuidv4(),name:'Steak'},
-    {id:uuidv4(),name:'Water'}
-]
+
 const ShoppingList = ()=>{
-    const [items,setItems] = useState(defaultItems)
+    const dispatch = useDispatch()
+    const {items,loading} = useSelector(state=>state.items)
+    console.log(items);
+    useEffect(()=>{ 
+        dispatch(getItems())
+    },[])
 
-    const addItem =()=>{
+    const addItemBtn =()=>{
         const name = prompt('Enter Item')
         if(name){
-            setItems(pre=>(
-                [...pre,{id:uuidv4(),name}]
-            ))
+            dispatch(addItem({name}))
         }
     }
-    const deleteItem =(id)=>{
-        setItems(pre=>(pre.filter(item=>item.id!==id)))
+    const deleteItemBtn =(id)=>{
+        dispatch(deleteItem(id))
+    }
+    if(loading){
+        return(<h3>Loading....</h3>)
     }
     return (
         <Container>
-            <Button color='dark' style={{marginBottom:'2rem'}}
-                onClick={addItem}>
-                Add Item
-            </Button>
             <ListGroup>
                 <TransitionGroup className='shopping-list'>
-                    {items.map(({id,name})=>(
-                        <CSSTransition key = {id} timeout={500} classNames='fade'>
+                    {items.map(({_id,name})=>(
+                        <CSSTransition key={_id} timeout={500} classNames='fade'>
                             <ListGroupItem>
                                 <Button className='remove-btn'  
-                                    color='danger' size='sm' onClick={()=>deleteItem(id)}>   
+                                    color='danger' size='sm' onClick={()=>deleteItemBtn(_id)}>   
                                     &times;
                                 </Button>
                                 {name}
