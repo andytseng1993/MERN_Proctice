@@ -1,19 +1,22 @@
 import {Container, ListGroup, ListGroupItem, Button} from 'reactstrap'
 import {CSSTransition,TransitionGroup} from 'react-transition-group'
-import { v4 as uuidv4 } from 'uuid'
 import { useDispatch,useSelector } from "react-redux"
-import { addItem,deleteItem } from '../redux/actions'
+import { addItem,deleteItem, getItems } from '../redux/actions'
+import { useEffect } from 'react'
 
 
 const ShoppingList = ()=>{
     const dispatch = useDispatch()
     const {items} = useSelector(state=>state.items)
+    console.log(items);
+    useEffect(()=>{ 
+        dispatch(getItems())
+    },[])
 
     const addItemBtn =()=>{
         const name = prompt('Enter Item')
-        console.log(name)
         if(name){
-            dispatch(addItem({id:uuidv4(),name}))
+            dispatch(addItem({name}))
         }
     }
     const deleteItemBtn =(id)=>{
@@ -23,11 +26,11 @@ const ShoppingList = ()=>{
         <Container>
             <ListGroup>
                 <TransitionGroup className='shopping-list'>
-                    {items.map(({id,name})=>(
-                        <CSSTransition key={id} timeout={500} classNames='fade'>
+                    {items.map(({_id,name})=>(
+                        <CSSTransition key={_id} timeout={500} classNames='fade'>
                             <ListGroupItem>
                                 <Button className='remove-btn'  
-                                    color='danger' size='sm' onClick={()=>deleteItemBtn(id)}>   
+                                    color='danger' size='sm' onClick={()=>deleteItemBtn(_id)}>   
                                     &times;
                                 </Button>
                                 {name}
