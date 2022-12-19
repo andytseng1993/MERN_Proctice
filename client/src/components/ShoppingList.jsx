@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 
 const ShoppingList = ()=>{
     const dispatch = useDispatch()
-    const {items} = useSelector(state=>state.items)
+    const {items,loading} = useSelector(state=>state.items)
     console.log(items);
     useEffect(()=>{ 
         dispatch(getItems())
@@ -21,6 +21,9 @@ const ShoppingList = ()=>{
     }
     const deleteItemBtn =(id)=>{
         dispatch(deleteItem(id))
+    }
+    if(loading){
+        return(<h3>Loading....</h3>)
     }
     return (
         <Container>

@@ -20,11 +20,15 @@ export const addItem = (product)=>dispatch=>{
                 })
             )
 }
-export const deleteItem = (id)=>{
-    return{
-        type:ACTIONS.DELETE_ITEM,
-        payload: id
-    }
+export const deleteItem = (id)=>dispatch=>{
+    axios
+        .delete(`/api/items/${id}`)
+        .then(res=>
+            dispatch({
+                type:ACTIONS.DELETE_ITEM,
+                payload: id
+            })
+        )
 }
 export const setItemsLoading =()=>{
     return{
