@@ -17,7 +17,8 @@
 
 ## build frontend part with vite-react
 ## Redux in frontend
-use `configureStore()` . to combine reducers. 
+1. use `configureStore()` . to combine reducers. 
+2. using thunk, then dispatch an action after an action. E.g. in addItem action, do axios then dispatch an action and return res.data to payload . 
 
 ## Redirect client proxy in Vite.config.js
 1. In vite.config.js add 
