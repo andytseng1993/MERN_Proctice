@@ -1,6 +1,6 @@
 import {ACTIONS} from './types'
 import axios from 'axios'
-
+import { returnErrors } from './errorActions'
 //Check token & load user
 
 export const loadUser = ()=>(dispatch,getState)=>{
@@ -23,6 +23,7 @@ export const loadUser = ()=>(dispatch,getState)=>{
             payload:res.data
         }))
         .catch(err=>{
+            dispatch(returnErrors(err.response.data, err.response.status))
             dispatch({
                 type:ACTIONS.AUTH_ERROR
             })
