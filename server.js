@@ -17,7 +17,7 @@ mongoose.connect(db,()=>console.log('MongoDB Connect...'))
 //Use Routes
 app.use('/api/items',require('./routes/api/items'))
 app.use('/api/users',require('./routes/api/users'))
-
+app.use('/api/auth',require('./routes/api/auth'))
 //set static folder
 app.use(express.static(path.join(__dirname,'./client/dist')))
 
