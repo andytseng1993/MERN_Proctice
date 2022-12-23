@@ -16,9 +16,22 @@
     Use concurrently to run both server.
 
 ## build frontend part with vite-react
+
 ## Redux in frontend
-1. use `configureStore()` . to combine reducers. 
-2. using thunk, then dispatch an action after an action. E.g. in addItem action, do axios then dispatch an action and return res.data to payload . 
+1. Middleware: Middleware extends the store's abilities, and lets you write async logic that interacts with the store.
+2. Thunks are the recommended middleware for basic Redux side effects logic, including complex synchronous logic that needs access to the store, and simple async logic like AJAX requests.
+3. use `configureStore()` . to combine reducers.   
+// The thunk middleware was automatically added.   
+[redux-thunk]https://github.com/reduxjs/redux-thunk
+```
+  const store = configureStore({
+    reducer: { //same as combineReducers
+      something: someReducer
+      otherthing: otherReducer
+    }
+  })
+```
+4. using thunk, then dispatch an action after an action. E.g. in addItem action, do axios then dispatch an action and return res.data to payload . 
 
 ## Redirect client proxy in Vite.config.js
 1. In vite.config.js add 
