@@ -32,6 +32,7 @@ export default authReducer=(state =initialState,action)=>{
         case ACTIONS.LOGOUT_SUCCES:
         case ACTIONS.LOGIN_FAIL:
         case ACTIONS.REGISTER_FAIL:
+            localStorage.removeItem('token')
             return{
                 ...state,
                 token: null,
