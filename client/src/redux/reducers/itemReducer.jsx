@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid'
 import {ACTIONS} from '../actions/types'
 
 const initialState ={
@@ -6,7 +5,7 @@ const initialState ={
     loading: false
 }
 
-export const itemReducer= (state = initialState,action)=>{
+export default itemReducer= (state = initialState,action)=>{
     switch(action.type){
         case ACTIONS.GET_ITEMS:
             return {
