@@ -6,7 +6,7 @@ const initialState = {
     isLoading:false,
     user:null
 }
-export default authReducer=(state =initialState,action)=>{
+export const authReducer=(state =initialState,action)=>{
     switch(action.type){
         case ACTIONS.USER_LOGING:
             return{

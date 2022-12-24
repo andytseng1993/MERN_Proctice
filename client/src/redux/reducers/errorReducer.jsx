@@ -6,7 +6,7 @@ const initialState ={
     id: null
 }
 
-export default errorReducer=(state=initialState,action)=>{
+export const errorReducer=(state=initialState,action)=>{
     switch(action.type){
         case ACTIONS.GET_ERRORS:
             return{
@@ -18,7 +18,6 @@ export default errorReducer=(state=initialState,action)=>{
             return {
                 msg:{},
                 status:null,
-                id:null
             }
         default:
             return state
