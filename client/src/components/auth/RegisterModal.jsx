@@ -12,11 +12,9 @@ import {
 } from 'reactstrap';
 
 import {useDispatch,useSelector} from 'react-redux'
-
-import { useEffect, useState } from 'react';
-import { register } from '../redux/actions/authActions';
-import { clearErrors } from '../redux/actions/errorActions';
-
+import { useEffect, useState } from 'react'
+import { register } from '../../redux/actions/authActions'
+import { clearErrors } from '../../redux/actions/errorActions'
 
 const RegisterModal =()=>{
     const [state,setState] = useState({

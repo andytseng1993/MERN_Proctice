@@ -51,3 +51,9 @@ export const register =({ name,email,password})=>dispatch=>{
             dispatch(returnErrors(err.response.data, err.response.status,'REGISTER_FAIL'))
         })
 }
+//Logout User
+export const logout = ()=>{
+    return{
+        type: ACTIONS.LOGOUT_SUCCES
+    }
+}
