@@ -9,7 +9,7 @@ import {
     Input
 } from 'reactstrap';
 
-import {useDispatch} from 'react-redux'
+import {useDispatch , useSelector} from 'react-redux'
 import { addItem } from '../redux/actions'
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid'
@@ -19,6 +19,7 @@ const ItemModal =()=>{
         modal: false,
         name: ''
     })
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
     const dispatch = useDispatch()
 
     const toggle = ()=>{
@@ -39,11 +40,14 @@ const ItemModal =()=>{
 
     return(
         <div>
-            <Button
-                color='dark'
-                style={{margin:'2rem'}}
-                onClick={toggle}
-            >Add Item</Button>
+            {isAuthenticated?
+                 <Button
+                 color='dark'
+                 style={{margin:'2rem'}}
+                 onClick={toggle}
+             >Add Item</Button> :
+             <h4 style={{margin:'2rem'}}>Please log in to manage items</h4>
+            }
             <Modal
                 isOpen={state.modal}
                 toggle={toggle}
