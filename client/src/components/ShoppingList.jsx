@@ -8,7 +8,8 @@ import { useEffect } from 'react'
 const ShoppingList = ()=>{
     const dispatch = useDispatch()
     const {items,loading} = useSelector(state=>state.items)
-    console.log(items);
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
+
     useEffect(()=>{ 
         dispatch(getItems())
     },[])
@@ -32,10 +33,13 @@ const ShoppingList = ()=>{
                     {items.map(({_id,name})=>(
                         <CSSTransition key={_id} timeout={500} classNames='fade'>
                             <ListGroupItem>
-                                <Button className='remove-btn'  
+                                {isAuthenticated?
+                                    <Button className='remove-btn'  
                                     color='danger' size='sm' onClick={()=>deleteItemBtn(_id)}>   
                                     &times;
-                                </Button>
+                                    </Button>
+                                    :null
+                                }
                                 {name}
                             </ListGroupItem>
                         </CSSTransition>
