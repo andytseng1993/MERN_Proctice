@@ -28,7 +28,7 @@ const LoginModal =()=>{
     const isAuthenticated = useSelector(state=>state.auth.isAuthenticated)
 
     useEffect(()=>{
-        if(error.id==='REGISTER_FAIL'){
+        if(error.id==='LOGIN_FAIL'){
            return setState(prev=>({...prev,msg:error.msg.msg}))
         }
         setState(prev=>({...prev,msg:null}))
@@ -45,7 +45,9 @@ const LoginModal =()=>{
     }
     const onSubmit =(e)=>{
         e.preventDefault()
-       
+       const {email,password} = state
+       const user = {email,password}
+       dispatch(login(user))
     }
     const onChange = (e)=>{
         setState(pre=>({...pre,[e.target.name]:e.target.value}))
