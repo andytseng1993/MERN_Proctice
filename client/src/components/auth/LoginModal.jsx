@@ -13,13 +13,12 @@ import {
 
 import {useDispatch,useSelector} from 'react-redux'
 import { useEffect, useState } from 'react'
-import { register } from '../../redux/actions/authActions'
+import { login } from '../../redux/actions/authActions'
 import { clearErrors } from '../../redux/actions/errorActions'
 
-const RegisterModal =()=>{
+const LoginModal =()=>{
     const [state,setState] = useState({
         modal: false,
-        name: '',
         email:'',
         password:'',
         msg:null
@@ -46,10 +45,7 @@ const RegisterModal =()=>{
     }
     const onSubmit =(e)=>{
         e.preventDefault()
-        const {name,email,password} = state
-        //Create user object
-        const newUser = {name,email,password }
-        dispatch(register(newUser))
+       
     }
     const onChange = (e)=>{
         setState(pre=>({...pre,[e.target.name]:e.target.value}))
@@ -58,26 +54,17 @@ const RegisterModal =()=>{
     return(
         <div>
             <NavLink onClick={toggle} href='#'>
-                Register
+                Login
             </NavLink>
             <Modal
                 isOpen={state.modal}
                 toggle={toggle}
             >
-                <ModalHeader toggle={toggle}>Register</ModalHeader>
+                <ModalHeader toggle={toggle}>Login</ModalHeader>
                 <ModalBody>
                     {state.msg? <Alert color='danger'>{state.msg}</Alert>:null}
                     <Form onSubmit={onSubmit}>
                         <FormGroup>
-                            <Label for='name'>Name</Label>
-                            <Input
-                                type='text'
-                                name='name'
-                                id='name'
-                                placeholder='Name'
-                                className='mb-3'
-                                onChange={onChange}
-                            />
                             <Label for='email'>Email</Label>
                             <Input
                                 type='email'
@@ -100,7 +87,7 @@ const RegisterModal =()=>{
                                 color='dark'
                                 style={{marginTop:'2rem'}} 
                                 block
-                            >Register</Button>
+                            >Login</Button>
                         </FormGroup>
                     </Form>
                 </ModalBody>
@@ -108,4 +95,4 @@ const RegisterModal =()=>{
         </div>
     )
 }
-export default RegisterModal
+export default LoginModal

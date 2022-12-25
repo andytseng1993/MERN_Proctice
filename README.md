@@ -41,7 +41,7 @@
     server: {
         proxy: {
         // string shorthand
-        '/api/items': 'http://localhost:3000',
+        '/api': 'http://localhost:3000'
         }
         }
     })

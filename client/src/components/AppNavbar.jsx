@@ -9,6 +9,7 @@ import {
     NavLink,
     Container
   } from 'reactstrap';
+import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
 import RegisterModal from './auth/RegisterModal';
 
@@ -27,6 +28,9 @@ const AppNavbar = (props) =>{
                     <Nav className='ms-auto' navbar>
                         <NavItem>
                             <RegisterModal/>
+                        </NavItem>
+                        <NavItem>
+                            <LoginModal/>
                         </NavItem>
                         <NavItem>
                             <Logout/>
