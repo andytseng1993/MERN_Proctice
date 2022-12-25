@@ -6,7 +6,8 @@ import {
     Form,
     FormGroup,
     Label,
-    Input
+    Input,
+    Container
 } from 'reactstrap';
 
 import {useDispatch , useSelector} from 'react-redux'
@@ -40,14 +41,17 @@ const ItemModal =()=>{
 
     return(
         <div>
-            {isAuthenticated?
-                 <Button
-                 color='dark'
-                 style={{margin:'2rem'}}
-                 onClick={toggle}
-             >Add Item</Button> :
-             <h4 style={{margin:'2rem'}}>Please log in to manage items</h4>
-            }
+            <Container>
+                {isAuthenticated?
+                    <Button
+                        color='dark'
+                        className='mb-4'
+                        onClick={toggle}
+                    >Add Item</Button> 
+                    :
+                    <h4 className='mb-4'>Please log in to manage items</h4>
+                }
+            </Container>
             <Modal
                 isOpen={state.modal}
                 toggle={toggle}

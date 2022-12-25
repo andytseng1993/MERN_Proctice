@@ -1,4 +1,4 @@
-const config = require('config')
+require('dotenv').config()
 const jwt = require('jsonwebtoken')
 
 function auth (req,res,next){
@@ -6,7 +6,7 @@ function auth (req,res,next){
     if(!token) return res.status(401).json({msg:'No token, authorization denied'})
     
     try{
-        const decode = jwt.verify(token, config.get('jwtSecret'))
+        const decode = jwt.verify(token, process.env.JWTSECRET)
         //Add user from payload
         req.user = decode
         next()

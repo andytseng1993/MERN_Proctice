@@ -58,7 +58,7 @@
     })
 
 ```
-2. Creste `vercel.json`
+2. Create `vercel.json`
 ```
     "builds": [
       {
@@ -77,5 +77,5 @@
       }
     ]
 ```
-3. In Ternimal `npm run build`
+3. In Ternimal `npm run build` in cd client
 4. In Terminal `vercel`
