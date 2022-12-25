@@ -6,18 +6,8 @@ import { returnErrors } from './errorActions'
 export const loadUser = ()=>(dispatch,getState)=>{
     //User loading
     dispatch({type:ACTIONS.USER_LOGING});
-    //Get token from localStoragy
-    const token = getState().auth.token
-    //Headers
-    const config = {
-        headers:{
-            "Content-type": 'application/json'
-        }
-    }
-    if(token){
-        config.headers['x-auth-token'] = token
-    }
-    axios.get('/api/auth/user',config)
+    
+    axios.get('/api/auth/user',tokenConfig(getState))
         .then(res=>dispatch({
             type:ACTIONS.USER_LOADED,
             payload:res.data
@@ -29,6 +19,21 @@ export const loadUser = ()=>(dispatch,getState)=>{
             })
         })
     
+}
+//Setup config/headers and token
+export const tokenConfig = getState=>{
+    //Get token from localStoragy
+    const token = getState().auth.token
+    //Headers
+    const config = {
+        headers:{
+            "Content-type": 'application/json'
+        }
+    }
+    if(token){
+        config.headers['x-auth-token'] = token
+    }
+    return config
 }
 
 //Register User
